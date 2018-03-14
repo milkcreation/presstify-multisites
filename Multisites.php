@@ -1,7 +1,7 @@
 <?php
 /*
  Plugin Name: Multisites
- Plugin URI: http://presstify.com/plugins/multisites
+ Plugin URI: https://presstify.com/plugins/multisites
  Description: Multisites
  Version: 1.0.0
  Author: Milkcreation
