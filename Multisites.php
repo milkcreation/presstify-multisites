@@ -3,7 +3,7 @@
  Plugin Name: Multisites
  Plugin URI: https://presstify.com/plugins/multisites
  Description: Multisites
- Version: 1.0.0
+ Version: 1.0.1
  Author: Milkcreation
  Author URI: http://milkcreation.fr
  Text Domain: tify
