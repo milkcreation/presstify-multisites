@@ -1,0 +1,43 @@
+{
+  "name": "presstify-plugins/multisites",
+  "description": "PresstiFy Plugin Multisites",
+  "type": "presstify-plugin",
+  "keywords": [
+    "presstify",
+    "plugins",
+    "wordpress",
+    "multisites"
+  ],
+  "homepage": "https://svn.tigreblanc.fr/presstify-plugins/multisites",
+  "time": "2018-03-29",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Jordy Manner",
+      "email": "jordy.manner@milkcreation.fr",
+      "role": "Developper"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://composer.tigreblanc.fr/presstify/"
+    }
+  ],
+  "require": {
+    "composer/installers": "~1.0",
+    "presstify/framework": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "tiFy\\Plugins\\Multisites\\": ""
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
