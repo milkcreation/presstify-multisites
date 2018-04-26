@@ -3,7 +3,7 @@
  Plugin Name: Multisites
  Plugin URI: https://presstify.com/plugins/multisites
  Description: Multisites
- Version: 1.0.1
+ Version: 1.1.0
  Author: Milkcreation
  Author URI: http://milkcreation.fr
  Text Domain: tify
@@ -11,35 +11,34 @@
 
 namespace tiFy\Plugins\Multisites;
 
-class Multisites extends \tiFy\App\Plugin
+use tiFy\App\Plugin;
+
+class Multisites extends Plugin
 {
     /**
-     * CONSTRUCTEUR
+     * CONSTRUCTEUR.
      *
      * @return void
      */
     public function __construct()
     {
         // Déclaration des événement de déclenchement
-        $this->tFyAppActionAdd('admin_enqueue_scripts');
-        $this->tFyAppActionAdd('user_new_form');
+        $this->appAddAction('admin_enqueue_scripts');
+        $this->appAddAction('user_new_form');
     }
 
     /**
-     * DECLENCHEURS
-     */
-    /**
-     * Mise en file de scripts de l'interface d'administration
+     * Mise en file de scripts de l'interface d'administration.
      *
      * @return void
      */
     public function admin_enqueue_scripts()
     {
-        wp_enqueue_script('tiFyPluginsMultisites', self::tFyAppUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
+        \wp_enqueue_script('tiFyPluginsMultisites', $this->appUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
     }
 
     /**
-     * Ajout de champs de pour la création de nouveaux utilisateurs
+     * Ajout de champs de pour la création de nouveaux utilisateurs.
      *
      * @param string $context
      *
@@ -55,8 +54,6 @@ class Multisites extends \tiFy\App\Plugin
         endif;
 
         //Force la création d'un nouvel utilisateur sans demande de confirmation par email
-?>
-<input type="hidden" name="noconfirmation" value="1" />
-<?php
+?><input type="hidden" name="noconfirmation" value="1" /><?php
     }
 }
