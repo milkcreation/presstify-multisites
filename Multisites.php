@@ -1,19 +1,19 @@
 <?php
-/*
- Plugin Name: Multisites
- Plugin URI: https://presstify.com/plugins/multisites
- Description: Multisites
- Version: 1.1.0
- Author: Milkcreation
- Author URI: http://milkcreation.fr
- Text Domain: tify
-*/
+
+/**
+ * @name Multisites
+ * @desc Extension PresstiFy de gestion de Wordpress multisites.
+ * @author Jordy Manner <jordy@milkcreation.fr>
+ * @package presstiFy
+ * @namespace \tiFy\Plugins\Multisites
+ * @version 2.0.0
+ */
 
 namespace tiFy\Plugins\Multisites;
 
-use tiFy\App\Plugin;
+use tiFy\Apps\AppController;
 
-class Multisites extends Plugin
+final class Multisites extends AppController
 {
     /**
      * CONSTRUCTEUR.
@@ -22,6 +22,8 @@ class Multisites extends Plugin
      */
     public function __construct()
     {
+        parent::__construct();
+
         // Déclaration des événement de déclenchement
         $this->appAddAction('admin_enqueue_scripts');
         $this->appAddAction('user_new_form');
