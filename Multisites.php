@@ -16,14 +16,12 @@ use tiFy\Apps\AppController;
 final class Multisites extends AppController
 {
     /**
-     * CONSTRUCTEUR.
+     * Initialisation du controleur.
      *
      * @return void
      */
-    public function __construct()
+    public function appBoot()
     {
-        parent::__construct();
-
         // Déclaration des événement de déclenchement
         $this->appAddAction('admin_enqueue_scripts');
         $this->appAddAction('user_new_form');
