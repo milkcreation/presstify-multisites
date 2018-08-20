@@ -1,44 +1,45 @@
 <?php
-
-/**
- * @name Multisites
- * @desc Extension PresstiFy de gestion de Wordpress multisites.
- * @author Jordy Manner <jordy@milkcreation.fr>
- * @package presstiFy
- * @namespace \tiFy\Plugins\Multisites
- * @version 2.0.0
- */
+/*
+ Plugin Name: Multisites
+ Plugin URI: https://presstify.com/plugins/multisites
+ Description: Multisites
+ Version: 1.0.1
+ Author: Milkcreation
+ Author URI: http://milkcreation.fr
+ Text Domain: tify
+*/
 
 namespace tiFy\Plugins\Multisites;
 
-use tiFy\Apps\AppController;
-
-final class Multisites extends AppController
+class Multisites extends \tiFy\App\Plugin
 {
     /**
-     * Initialisation du controleur.
+     * CONSTRUCTEUR
      *
      * @return void
      */
-    public function appBoot()
+    public function __construct()
     {
         // Déclaration des événement de déclenchement
-        $this->appAddAction('admin_enqueue_scripts');
-        $this->appAddAction('user_new_form');
+        $this->tFyAppActionAdd('admin_enqueue_scripts');
+        $this->tFyAppActionAdd('user_new_form');
     }
 
     /**
-     * Mise en file de scripts de l'interface d'administration.
+     * DECLENCHEURS
+     */
+    /**
+     * Mise en file de scripts de l'interface d'administration
      *
      * @return void
      */
     public function admin_enqueue_scripts()
     {
-        \wp_enqueue_script('tiFyPluginsMultisites', $this->appUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
+        wp_enqueue_script('tiFyPluginsMultisites', self::tFyAppUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
     }
 
     /**
-     * Ajout de champs de pour la création de nouveaux utilisateurs.
+     * Ajout de champs de pour la création de nouveaux utilisateurs
      *
      * @param string $context
      *
@@ -54,6 +55,8 @@ final class Multisites extends AppController
         endif;
 
         //Force la création d'un nouvel utilisateur sans demande de confirmation par email
-?><input type="hidden" name="noconfirmation" value="1" /><?php
+?>
+<input type="hidden" name="noconfirmation" value="1" />
+<?php
     }
 }
