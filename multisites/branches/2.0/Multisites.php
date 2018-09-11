@@ -11,20 +11,17 @@
 
 namespace tiFy\Plugins\Multisites;
 
-use tiFy\Apps\AppController;
+use tiFy\App\Dependency\AbstractAppDependency;
 
-final class Multisites extends AppController
+final class Multisites extends AbstractAppDependency
 {
     /**
-     * Initialisation du controleur.
-     *
-     * @return void
+     * {@inheritdoc}
      */
-    public function appBoot()
+    public function boot()
     {
-        // Déclaration des événement de déclenchement
-        $this->appAddAction('admin_enqueue_scripts');
-        $this->appAddAction('user_new_form');
+        $this->app->appAddAction('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+        $this->app->appAddAction('user_new_form', [$this, 'user_new_form']);
     }
 
     /**
@@ -34,7 +31,7 @@ final class Multisites extends AppController
      */
     public function admin_enqueue_scripts()
     {
-        \wp_enqueue_script('tiFyPluginsMultisites', $this->appUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
+        \wp_enqueue_script('tiFyMultisites', class_info($this)->getUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
     }
 
     /**
