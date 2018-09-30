@@ -4,53 +4,46 @@
  * @name Multisites
  * @desc Extension PresstiFy de gestion de Wordpress multisites.
  * @author Jordy Manner <jordy@milkcreation.fr>
- * @package presstiFy
+ * @package presstify-plugins/multisites
  * @namespace \tiFy\Plugins\Multisites
- * @version 2.0.0
+ * @version 2.0.1
  */
 
 namespace tiFy\Plugins\Multisites;
 
-use tiFy\App\Dependency\AbstractAppDependency;
-
-final class Multisites extends AbstractAppDependency
+final class Multisites
 {
     /**
-     * {@inheritdoc}
-     */
-    public function boot()
-    {
-        $this->app->appAddAction('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
-        $this->app->appAddAction('user_new_form', [$this, 'user_new_form']);
-    }
-
-    /**
-     * Mise en file de scripts de l'interface d'administration.
+     * CONSTRUCTEUR.
      *
      * @return void
      */
-    public function admin_enqueue_scripts()
+    public function __construct()
     {
-        \wp_enqueue_script('tiFyMultisites', class_info($this)->getUrl() . '/assets/js/Multisites.js', ['jquery'], 171106);
-    }
+        add_action(
+            'admin_enqueue_scripts',
+            function () {
+                wp_enqueue_script(
+                    'multisites',
+                    class_info($this)->getUrl() . '/Resources/assets/js/scripts.js',
+                    ['jquery'],
+                    171106
+                );
+            }
+        );
 
-    /**
-     * Ajout de champs de pour la création de nouveaux utilisateurs.
-     *
-     * @param string $context
-     *
-     * @return string
-     */
-    public function user_new_form($context)
-    {
-        if (!is_multisite()|| !current_user_can('manage_network_users')) :
-            return;
-        endif;
-        if (!in_array($context, ['add-existing-user', 'add-new-user'])) :
-            return;
-        endif;
+        add_action(
+            'user_new_form',
+            function ($context) {
+                if (!is_multisite()|| !current_user_can('manage_network_users')) :
+                    return;
+                elseif (!in_array($context, ['add-existing-user', 'add-new-user'])) :
+                    return;
+                endif;
 
-        //Force la création d'un nouvel utilisateur sans demande de confirmation par email
-?><input type="hidden" name="noconfirmation" value="1" /><?php
+                //Force la création d'un nouvel utilisateur sans demande de confirmation par email.
+                ?><input type="hidden" name="noconfirmation" value="1" /><?php
+            }
+        );
     }
 }
